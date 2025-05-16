@@ -9,6 +9,9 @@ node_modules
 .env.staging
 .cache
 
+
+set-production-secrets.sh
+set-staging-secrets.sh
 tsconfig.tsbuildinfo
 
 /prisma/data.db
