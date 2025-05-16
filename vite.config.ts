@@ -15,6 +15,9 @@ const createHash = init({
 const buildHash = process.env.BUILD_HASH || createHash();
 
 export default defineConfig({
+  build: {
+    sourcemap: 'hidden', // Instead of true
+  },
   server: {
     port: 3000,
     // https: {

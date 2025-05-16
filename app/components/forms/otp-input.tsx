@@ -5,10 +5,9 @@ import { Minus } from "lucide-react";
 import { tw } from "~/utils/tw";
 import { InnerLabel } from "./inner-label";
 
-const InputOTP = React.forwardRef<
-  React.ElementRef<typeof OTPInput>,
-  React.ComponentPropsWithoutRef<typeof OTPInput>
->(({ className, containerClassName, ...props }, ref) => (
+const InputOTP = forwardRef<HTMLInputElement>((props, ref) => {
+  // Add proper TypeScript typings for props
+  // Ensure all imports are correctly referenced
   <OTPInput
     ref={ref}
     containerClassName={tw(
@@ -18,7 +17,7 @@ const InputOTP = React.forwardRef<
     className={tw("disabled:cursor-not-allowed", className)}
     {...props}
   />
-));
+});
 InputOTP.displayName = "InputOTP";
 
 const InputOTPGroup = React.forwardRef<
