@@ -209,3 +209,11 @@ app.use(cors({
   origin: process.env.SERVER_URL,
   credentials: true
 }));
+
+// Add early connection check
+prisma.$connect()
+  .then(() => console.log('Database connected'))
+  .catch((error) => {
+    console.error('Database connection error:', error);
+    process.exit(1);
+  });
