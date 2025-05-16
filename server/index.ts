@@ -13,6 +13,7 @@ import { logger } from "./logger";
 import { protect, refreshSession, urlShortener } from "./middleware";
 import { authSessionKey, createSessionStorage } from "./session";
 import type { FlashData, SessionData } from "./session";
+import cors from 'cors';
 
 // Server will not start if the env is not valid
 initEnv();
@@ -202,3 +203,9 @@ declare module "@remix-run/node" {
     errorMessage: string | null;
   }
 }
+
+const app = express();
+app.use(cors({
+  origin: process.env.SERVER_URL,
+  credentials: true
+}));
