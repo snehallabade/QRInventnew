@@ -110,3 +110,16 @@ jobs:
           flyctl ssh console --app ${{ steps.app_name.outputs.value }} -C "npm run db:deploy-migration:production"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN_PRODUCTION }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm run build
+      - name: Build Docker Image
+        run: docker build -t qrinvent .

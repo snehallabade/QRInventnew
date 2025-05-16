@@ -27,7 +27,19 @@ COPY --from=deps /src/node_modules /src/node_modules
 ADD . .
 
 RUN npx prisma generate
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package* ./
+RUN npm ci
+COPY . .
 RUN npm run build
+
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/node_modules ./node_modules
+COPY . .
+CMD ["npm", "start"]
 RUN npm prune --omit=dev
 
 # Finally, build the production image with minimal footprint
